@@ -8,7 +8,7 @@ Accepted
 
 ## Context
 
-The Mars Robot Simulator project involves writing and maintaining a decent amount of TypeScript code. To ensure code quality, consistency, and readability, it is essential to enforce coding standards and automate formatting. Manual code reviews and formatting are error-prone and time-consuming.
+The Martian Robots Simulator project involves writing and maintaining a decent amount of TypeScript code. To ensure code quality, consistency, and readability, it is essential to enforce coding standards and automate formatting. Manual code reviews and formatting are error-prone and time-consuming.
 
 ## Decision
 

@@ -57,3 +57,13 @@ This project uses **ESLint**, **Prettier**, and **Vitest** to ensure code qualit
 - `npm run format`: Format all files using Prettier.
 - `npm run format:check`: Check if files are formatted correctly.
 - `npm test`: Run unit tests using Vitest.
+
+### GitHub Actions
+
+A GitHub Actions workflow runs on every push and pull request to ensure that:
+
+- The code passes ESLint checks.
+
+- The code is formatted according to Prettier rules.
+
+- The code passes the unit tests.
