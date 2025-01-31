@@ -1,7 +1,14 @@
-import { describe, it, expect } from "vitest";
-import { deployRobot } from "./deployRobot";
+import { beforeEach, describe, it, expect } from "vitest";
+import { createMission } from "./missionCreator";
 
 describe("deployRobot", () => {
+  let deployRobot: ReturnType<typeof createMission>;
+
+  // Create a new instance of deployRobot before each test
+  beforeEach(() => {
+    deployRobot = createMission("5 3");
+  });
+
   it("should move forward correctly", () => {
     expect(deployRobot("1 1 N", "F")).toBe("1 2 N");
   });
@@ -18,7 +25,7 @@ describe("deployRobot", () => {
     expect(deployRobot("1 1 E", "RFRFRFRF")).toBe("1 1 E");
   });
 
-  it.skip("should handle moving out of bounds and return LOST", () => {
+  it("should handle moving out of bounds and return LOST", () => {
     expect(deployRobot("3 2 N", "FRRFLLFFRRFLL")).toBe("3 3 N LOST");
   });
 
