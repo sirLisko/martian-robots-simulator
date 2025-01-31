@@ -28,7 +28,15 @@ There is a [collection of ADRs](docs/adr) that document the decisions taken duri
 
 1. **Prerequisites**:
 
-   - Ensure you have [Node.js](https://nodejs.org/) installed.
+   Ensure you have [Node.js](https://nodejs.org/) (v. 20.18) installed.
+
+   If you [NVM](https://github.com/nvm-sh/nvm) installed you can run
+
+   ```bash
+   nvm use
+   ```
+
+   to have the correct version of Node.
 
 2. **Clone the repository**:
 
@@ -67,3 +75,27 @@ A GitHub Actions workflow runs on every push and pull request to ensure that:
 - The code is formatted according to Prettier rules.
 
 - The code passes the unit tests.
+
+## The stack
+
+- **Runtime**: Node.js (v. 20.18) for running the simulation and CLI.
+- **Language**: TypeScript for type safety and better developer experience.
+- **Validation**: Zod for robust input validation.
+- **Linting and Formatting**: ESLint and Prettier for consistent code quality and style.
+- **Testing**: Unit tests with Vitest and integration tests for the CLI.
+- **CLI Interaction**: prompts for interactive command-line input.
+- **CI/CD**: GitHub Actions for automating linting, formatting, and testing.
+
+## Improvements
+
+- Add more unit tests, especially including more edge cases and error scenarios.
+- Add integration tests to ensure the CLI works properly, at the moment there is a test mocking the `prompts` library.
+- Improve error handling and messages, now there is a generic message per input.
+- Generate API documentation, using for example TypeDoc, for all the modules.
+- Add an help functionality for the CLI
+- Add pre-commit/pre-push validation using [Husky](https://github.com/typicode/husky)
+
+  - enforce conditional commit syntax
+  - prevent to break the pipelines if the checks are not passing in local
+
+- Probably I am forgetting a bunch of them :-)
