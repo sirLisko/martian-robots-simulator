@@ -5,6 +5,8 @@ const GRID_Y = parseInt(GRID.split(" ")[1], 10);
 const DIRECTIONS = ["N", "E", "S", "W"] as const;
 type Direction = (typeof DIRECTIONS)[number];
 
+const scent = new Set<string>();
+
 const calculateNextPosition = (
   x: number,
   y: number,
@@ -27,7 +29,7 @@ const calculateNextPosition = (
 };
 
 const isOutOfBounds = (x: number, y: number): boolean =>
-  x < 0 || y < 0 || x >= GRID_X || y >= GRID_Y;
+  x < 0 || y < 0 || x > GRID_X || y > GRID_Y;
 
 export const deployRobot = (position: string, movements: string): string => {
   const [x, y, direction] = position.split(" ");
@@ -48,7 +50,10 @@ export const deployRobot = (position: string, movements: string): string => {
       );
 
       if (isOutOfBounds(nextX, nextY)) {
-        return `${nextX} ${nextY} ${DIRECTIONS[currentDirection]} LOST`;
+        if (!scent.has(`${currentX} ${currentY}`)) {
+          scent.add(`${currentX} ${currentY}`);
+          return `${currentX} ${currentY} ${DIRECTIONS[currentDirection]} LOST`;
+        }
       } else {
         [currentX, currentY] = [nextX, nextY];
       }
