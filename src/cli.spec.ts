@@ -11,6 +11,7 @@ describe("runCLI", () => {
   let consoleLogSpy: any;
 
   beforeEach(() => {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     consoleLogSpy = vi.spyOn(console, "log").mockImplementation(() => {});
   });
 
