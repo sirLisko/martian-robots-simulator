@@ -19,8 +19,10 @@ const calculateNextPosition = (
       return [x, y - 1];
     case "W":
       return [x - 1, y];
-    default:
-      throw new Error("Invalid direction");
+    default: {
+      const neverHappens: never = DIRECTIONS[directionIndex];
+      return neverHappens;
+    }
   }
 };
 
