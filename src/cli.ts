@@ -1,5 +1,6 @@
 import prompts from "prompts";
 import { createMission } from "./missionCreator";
+import { GridSchema, MovementsSchema, PositionSchema } from "./schemas";
 
 export const runCLI = async (): Promise<void> => {
   console.log("Welcome to the Martian Robots Simulator!");
@@ -8,10 +9,10 @@ export const runCLI = async (): Promise<void> => {
     type: "text",
     name: "grid",
     message: "Enter the grid size (e.g., '5 3'):",
-    validate: (value) =>
-      /^\d+\s\d+$/.test(value)
-        ? true
-        : "Grid must be in the format '<number> <number>'",
+    validate: (value) => {
+      const result = GridSchema.safeParse(value);
+      return result.success ? true : result.error.errors[0].message;
+    },
   });
 
   const deployRobot = createMission(gridResponse.grid);
@@ -22,20 +23,20 @@ export const runCLI = async (): Promise<void> => {
       type: "text",
       name: "position",
       message: "Enter the robot's initial position (e.g., '1 1 E'):",
-      validate: (value) =>
-        /^\d+\s*\d+\s*[NESW]$/i.test(value)
-          ? true
-          : "Position must be in the format '<number> <number> <direction>'",
+      validate: (value) => {
+        const result = PositionSchema.safeParse(value);
+        return result.success ? true : result.error.errors[0].message;
+      },
     });
 
     const movementsResponse = await prompts({
       type: "text",
       name: "movements",
       message: "Enter the robot's movements (e.g., 'RFRFRFRF'):",
-      validate: (value) =>
-        /^[RLF]+$/i.test(value)
-          ? true
-          : "Movements can only contain 'R', 'L', or 'F'",
+      validate: (value) => {
+        const result = MovementsSchema.safeParse(value);
+        return result.success ? true : result.error.errors[0].message;
+      },
     });
 
     const result = deployRobot(

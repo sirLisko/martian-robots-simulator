@@ -41,4 +41,16 @@ describe("deployRobot", () => {
     const result2 = deployRobot("0 3 W", "LLFFFLFLFL");
     expect(result2).toBe("2 3 S");
   });
+
+  it("should throw an error for invalid position input", () => {
+    expect(() => deployRobot("51 1 E", "RFRFRFRF")).toThrow(
+      `Position must be in the format "<number> <number> <direction>('N', 'E', 'S', 'W')" and coordinates must be <= 50`,
+    );
+  });
+
+  it("should throw an error for invalid movements input", () => {
+    expect(() => deployRobot("1 1 E", "RFRFRFRFX")).toThrow(
+      "Movements must be less than 100 characters and only contain 'R', 'L', or 'F'",
+    );
+  });
 });

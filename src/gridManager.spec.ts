@@ -8,6 +8,12 @@ describe("createGrid", () => {
     expect(gridY).toBe(15);
   });
 
+  it("should throw an error for invalid grid input", () => {
+    expect(() => createGrid("151 1")).toThrow(
+      'Grid must be in the format "<number> <number>" and must be less than or equal to 50',
+    );
+  });
+
   describe("isOutOfBounds", () => {
     it("should return true for out-of-bounds coordinates", () => {
       const { isOutOfBounds } = createGrid("5 5");
