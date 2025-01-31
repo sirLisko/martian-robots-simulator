@@ -1,11 +1,11 @@
 import { GridSchema } from "./schemas";
 
-export type GridData = {
+export interface GridData {
   gridX: number;
   gridY: number;
   scent: Set<string>;
   isOutOfBounds: (x: number, y: number) => boolean;
-};
+}
 
 export const createGrid = (grid: string): GridData => {
   const gridValidation = GridSchema.safeParse(grid);
