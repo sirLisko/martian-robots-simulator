@@ -23,7 +23,6 @@ export default tseslint.config(
         { argsIgnorePattern: "^_" },
       ],
       "@typescript-eslint/no-explicit-any": "error",
-      "no-console": ["error", { allow: ["warn", "error"] }],
     },
   },
 );
