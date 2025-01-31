@@ -54,7 +54,14 @@ There is a [collection of ADRs](docs/adr) that document the decisions taken duri
 4. **Run the simulation**:
 
    ```bash
+   npm run build
    npm start
+   ```
+
+5. **Run the simulation (DEV mode)**:
+
+   ```bash
+   npm run dev
    ```
 
 ## Linting, Formatting, and Testing
@@ -92,7 +99,8 @@ A GitHub Actions workflow runs on every push and pull request to ensure that:
 - Add integration tests to ensure the CLI works properly, at the moment there is a test mocking the `prompts` library.
 - Improve error handling and messages, now there is a generic message per input.
 - Generate API documentation, using for example TypeDoc, for all the modules.
-- Add an help functionality for the CLI
+- Improve TS and eslint configs, I tried to use the latest version of eslint (9) but it's having some compatibility issues with TS.
+- Add an help functionality for the CLI.
 - Add pre-commit/pre-push validation using [Husky](https://github.com/typicode/husky)
 
   - enforce conditional commit syntax
