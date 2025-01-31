@@ -1,16 +1,27 @@
-import { Direction, DIRECTIONS } from "./constants";
+import { DIRECTIONS } from "./constants";
 import { GridData } from "./gridManager";
 import { calculateNextPosition } from "./positionCalculator";
+import { MovementsSchema, PositionSchema } from "./schemas";
 
 export const deployRobot = (
   grid: GridData,
   position: string,
   movements: string,
 ): string => {
+  const positionValidation = PositionSchema.safeParse(position);
+  if (!positionValidation.success) {
+    throw new Error(positionValidation.error.errors[0].message);
+  }
+
+  const movementsValidation = MovementsSchema.safeParse(movements);
+  if (!movementsValidation.success) {
+    throw new Error(movementsValidation.error.errors[0].message);
+  }
+
   const { isOutOfBounds, scent } = grid;
-  const [x, y, direction] = position.split(" ");
-  let [currentX, currentY] = [parseInt(x, 10), parseInt(y, 10)];
-  let currentDirection = DIRECTIONS.indexOf(direction as Direction);
+  let { x: currentX, y: currentY } = positionValidation.data;
+  const { direction } = positionValidation.data;
+  let currentDirection = DIRECTIONS.indexOf(direction);
 
   for (const movement of movements) {
     if (movement === "R") {

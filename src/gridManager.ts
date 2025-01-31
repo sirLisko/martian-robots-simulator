@@ -1,3 +1,5 @@
+import { GridSchema } from "./schemas";
+
 export type GridData = {
   gridX: number;
   gridY: number;
@@ -6,8 +8,12 @@ export type GridData = {
 };
 
 export const createGrid = (grid: string): GridData => {
-  const gridX = parseInt(grid.split(" ")[0], 10);
-  const gridY = parseInt(grid.split(" ")[1], 10);
+  const gridValidation = GridSchema.safeParse(grid);
+  if (!gridValidation.success) {
+    throw new Error(gridValidation.error.errors[0].message);
+  }
+  const { x: gridX, y: gridY } = gridValidation.data;
+
   const scent = new Set<string>();
 
   const isOutOfBounds = (x: number, y: number): boolean =>
