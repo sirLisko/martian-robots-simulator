@@ -14,13 +14,13 @@ A command-line interface (CLI) would make the application more interactive, user
 
 ## Decision
 
-The codebase has been modularise into smaller, self-contained modules with clear responsibilities.Use the prompts library to create an interactive CLI for the Mars Robot Simulator. The CLI will:
+The codebase has been modularise into smaller, self-contained modules with clear responsibilities. Use the prompts library to create an interactive CLI for the Martian Robots Simulator. The CLI will:
 
 1. Prompt the user for the grid size, robot position, and movements.
 
 2. Validate inputs to ensure they are in the correct format.
 
-3. Call the createRobotDeployer factory function to deploy the robot and display the result.
+3. Call the createMission factory function to deploy the robot and display the result.
 
 ## Consequences
 
